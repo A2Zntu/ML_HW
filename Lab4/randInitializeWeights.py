@@ -19,10 +19,12 @@ def randInitializeWeights(L_in, L_out):
 #               training the neural network.
 #
 # Note: The first row of W corresponds to the parameters for the bias units
-#
-
-
     
+    epsilon = np.sqrt(6)/np.sqrt(L_out + L_in)
+    s = np.random.uniform(-epsilon, epsilon, L_out * (1 + L_in))
+    W = s.reshape(L_out, 1 + L_in)
+    
+#
 # =========================================================================
 
     return W

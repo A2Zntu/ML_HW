@@ -33,11 +33,12 @@ num_labels = 10;            # 10 labels, from 0 to 9
                             # (note that we have mapped "0" to label 9 to follow
                             # the same structure used in the MatLab version)
 
-# =========== Part 1: Loading and Visualizing Data =============
+#%% =========== Part 1: Loading and Visualizing Data =============
 #  We start the exercise by first loading and visualizing the dataset. 
 #  You will be working with a dataset that contains handwritten digits.
 
 # Load Training Data
+                            
 print('Loading and Visualizing Data ...')
 
 mat = scipy.io.loadmat('digitdata.mat')
@@ -55,8 +56,7 @@ displayData(sel)
 
 input('Program paused. Press enter to continue')
 
-
-# ================ Part 2: Loading Pameters ================
+#%% ================ Part 2: Loading Pameters ================
 # In this part of the exercise, we load some pre-initialized 
 # neural network parameters.
 
@@ -73,14 +73,13 @@ Theta2_1d = np.reshape(Theta2, Theta2.size, order='F')
 
 nn_params = np.hstack((Theta1_1d, Theta2_1d))
 
-
-# ================= Part 3: Implement Predict =================
+#%% ================= Part 3: Implement Predict =================
 #  After training the neural network, we would like to use it to predict
 #  the labels. You will now implement the "predict" function to use the
 #  neural network to predict the labels of the training set. This lets
 #  you compute the training set accuracy.
 
-pred = predict(Theta1, Theta2, X);
+pred = predict(Theta1, Theta2, X)
 print('Training Set Accuracy: ', (pred == y).mean()*100)
 
 input('Program paused. Press enter to continue')
@@ -88,7 +87,7 @@ input('Program paused. Press enter to continue')
 #  To give you an idea of the network's output, you can also run
 #  through the examples one at the a time to see what it is predicting.
 #  Change the value of the show_examples variable to true to view examples.
-show_examples = False;
+show_examples = False
 
 if show_examples:
     #  Randomly permute examples
@@ -107,7 +106,7 @@ if show_examples:
         input('Program paused. Press enter to continue')
 
 
-# ================ Part 4: Sigmoid Gradient  ================
+#%% ================ Part 4: Sigmoid Gradient  ================
 #  Before you start implementing backpropagation, you will first
 #  implement the gradient for the sigmoid function. You should complete the
 #  code in the sigmoidGradient.m file.
@@ -120,7 +119,7 @@ print('Sigmoid gradient evaluated at', example, ':')
 print(g)
 
 
-# ================ Part 5: Initializing Pameters ================
+#%%================ Part 5: Initializing Pameters ================
 #  To learn a two layer neural network that classifies digits. You will start
 #  by implementing a function to initialize the weights of the neural network
 #  (randInitializeWeights.m)
@@ -136,7 +135,7 @@ initial_Theta2 = np.reshape(initial_Theta2, initial_Theta2.size, order='F')
 initial_nn_params = np.hstack((initial_Theta1, initial_Theta2))
 
 
-# =============== Part 6: Implement Backpropagation ===============
+#%% =============== Part 6: Implement Backpropagation ===============
 #  Now you will implement the backpropagation algorithm for the neural 
 #  network. You should add code to nnCostFunction.m to return the partial
 #  derivatives of the parameters.
@@ -149,7 +148,7 @@ checkNNGradients()
 input('Program paused. Press enter to continue')
 
 
-# =============== Part 7: Implement Regularization ===============
+#%% =============== Part 7: Implement Regularization ===============
 #  Once your backpropagation implementation is correct, you should now
 #  continue to implement the regularization gradient.
 #
@@ -170,7 +169,7 @@ print('Cost at (fixed) debugging parameters (w/ lambda = 10): ',  debug_J[0][0],
 input('Program paused. Press enter to continue')
 
 
-# =================== Part 8: Training NN ===================
+#%% =================== Part 8: Training NN ===================
 #  You have now implemented all the code necessary to train a neural 
 #  network. To train your neural network, we will now use "fmincg", which
 #  is a function which works similarly to "fminunc". Recall that these
@@ -205,7 +204,7 @@ Theta2 = np.reshape(nn_params[((hidden_layer_size * (input_layer_size + 1))):],
 input('Program paused. Press enter to continue')
 
 
-# ================= Part 9: Visualize Weights =================
+#%% ================= Part 9: Visualize Weights =================
 #  You can now "visualize" what the neural network is learning by 
 #  displaying the hidden units to see what features they are capturing in 
 #  the data.
@@ -217,7 +216,7 @@ displayData(Theta1[:, 1:])
 input('Program paused. Press enter to continue')
 
 
-# ============= Part 10: Predicting with learned weights =======
+#%% ============= Part 10: Predicting with learned weights =======
 #  After training the neural network, we would like to use it to predict
 #  the labels. The already implemented "predict" function is used by
 #  neural network to predict the labels of the training set. This lets

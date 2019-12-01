@@ -72,10 +72,36 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
 #       over the training examples if you are implementing it for the 
 #       first time.
 #
+    I = np.eye(num_labels)
+    Y = np.zeros((m, num_labels))
+    for i in range(m):
+        Y[i, :] = I[y[i]-1, :]
 
-
-
-
+    
+    for t in range(m):
+        a1 = X[t, :]
+        a1 = np.append([1], a1)
+        z2 = np.dot(Theta1, a1)
+        a2 = sigmoid(z2)
+        a2 = np.append([1], a2)
+        z3 = np.dot(Theta2, a2)
+        a3 = sigmoid(z3)
+        
+        # delta3 shape is 10 by 1
+        sigma3 = a3 - Y[t, :] 
+        # delta2 shape is 25 by 1 (eliminate bias)
+        sigma2 = np.multiply(np.dot(np.transpose(Theta2), sigma3)[1:],  sigmoidGradient(z2))
+        # combine the forward pass and backwardpass; the delta l/ delta w
+        delta2 = np.multiply(sigma3[np.newaxis].T, a2[np.newaxis])
+        delta1 = np.multiply(sigma2[np.newaxis].T, a1[np.newaxis])        
+      
+        Theta1_grad = Theta1_grad + delta1
+        Theta2_grad = Theta2_grad + delta2
+    
+    # average on the Theta gradient
+    Theta1_grad = Theta1_grad/m + (lambda_value/m) * np.hstack((np.zeros((Theta1.shape[0], 1)), Theta1[:, 1:]))
+    Theta2_grad = Theta2_grad/m + (lambda_value/m) * np.hstack((np.zeros((Theta2.shape[0], 1)), Theta2[:, 1:]))
+    
 
 # -------------------------------------------------------------
 
