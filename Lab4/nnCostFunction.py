@@ -87,9 +87,9 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X
         z3 = np.dot(Theta2, a2)
         a3 = sigmoid(z3)
         
-        # delta3 shape is 10 by 1
+        # sigma3 shape is 10 by 1
         sigma3 = a3 - Y[t, :] 
-        # delta2 shape is 25 by 1 (eliminate bias)
+        # sigma2 shape is 25 by 1 (eliminate bias)
         sigma2 = np.multiply(np.dot(np.transpose(Theta2), sigma3)[1:],  sigmoidGradient(z2))
         # combine the forward pass and backwardpass; the delta l/ delta w
         delta2 = np.multiply(sigma3[np.newaxis].T, a2[np.newaxis])
